@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Github, Instagram, Linkedin, Facebook, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import profileImage from '@/assets/hamza-ahmad-profile.jpg';
+import profileImage from '@/assets/profile.jpg';
 
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState(0);

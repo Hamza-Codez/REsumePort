@@ -139,7 +139,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background dark:bg-gradient-to-b from-zinc-900 via-gray-600 to-background  text-foreground transition-colors duration-300">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background dark:bg-gradient-to-b from-[#03033da1] via-[#1a09300c] to-background  text-foreground transition-colors duration-300">
       <section ref={sectionRef} id="skills" className="py-20 relative w-full">
         {/* Background elements for visual flair */}
         <div className="absolute inset-0 overflow-hidden z-0">
@@ -188,7 +188,7 @@ const App = () => {
           </div>
 
           {/* Stats with animation */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 pt-16">
             {[
               { number: "15+", label: "Technologies" },
               { number: "3", label: "Years Learning" },
