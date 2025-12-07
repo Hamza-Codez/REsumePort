@@ -65,7 +65,7 @@ const HeroSection = () => {
               <h2 className="text-md text-white font-medium text-muted-foreground">
                 Hi, It's me
               </h2>
-              <h1 className="text-2xl lg:text-3xl font-bold mb-2">
+              <h1 className="text-xl lg:text-2xl font-bold mb-2">
                 <span className="text-gradient bg-gradient-to-bl from-blue-100 to-slate-400/40">Hamza</span>
                 {/* <br /> */}
                 <span className="text-foreground"> Ahmad</span>
@@ -74,7 +74,7 @@ const HeroSection = () => {
 
             {/* Animated role */}
             <div className="mb-6 h-20 flex items-center">
-              <div className="text-2xl lg:text-3xl font-semibold">
+              <div className="text-xl lg:text-2xl font-semibold">
                 <span className="text-muted-foreground text-white">I'm a </span>
                 <span 
                   key={currentRole}
