@@ -18,8 +18,8 @@ const PROJECTS: Project[] = [
     category: 'Frontend',
     description: 'Modern portfolio website built with React & TypeScript focusing on performance and UX.',
     tech: ['React', 'TypeScript', 'Tailwind', 'Vite'],
-    liveUrl: 'https://hamza-portfolio.vercel.app',
-    githubUrl: 'https://github.com/hamza/portfolio'
+    liveUrl: 'https://resume-portfolio-two-alpha.vercel.app',
+    githubUrl: 'https://github.com/Hamza-Codez/REsumePort'
   },
   {
     id: 'g-mart',
