@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Experiences from "./pages/Experiences";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -17,10 +18,12 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          {/* THE FIX: Place it here, inside Router but above Routes */}
+          <ScrollToTop /> 
+          
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/experiences" element={<Experiences />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
