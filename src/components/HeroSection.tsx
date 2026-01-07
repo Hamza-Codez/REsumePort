@@ -69,7 +69,7 @@ const HeroSection = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-glow-pulse"></div>
 
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 mx-auto">
+              <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 mx-auto">
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-gray-300/20 hover-scale">
                   <img
                     src={profileImage}
