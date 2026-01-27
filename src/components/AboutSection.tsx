@@ -70,7 +70,7 @@ const AboutSection = () => {
               Me
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-md lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Passionate computer science student with a drive for innovation and
             excellence in software development.
           </p>
@@ -90,14 +90,14 @@ const AboutSection = () => {
               <div className="space-y-6">
                 {" "}
                 {/* Wrapped paragraphs in a div for consistent spacing */}
-                <p className="text-muted-foreground text-white leading-relaxed opacity-90">
+                <p className="text-md lg:text-lg text-muted-foreground leading-relaxed opacity-90">
                   I'm currently pursuing my Bachelor's in Computer Science
                   (2022-2026), where I've built a strong foundation in
                   programming fundamentals and advanced concepts. My passion
                   lies in creating digital solutions that make a meaningful
                   impact.
                 </p>
-                <p className="text-muted-foreground text-white leading-relaxed opacity-90">
+                <p className="text-md lg:text-lg text-muted-foreground leading-relaxed opacity-90">
                   Beyond academics, I'm constantly learning about modern web
                   technologies and staying up-to-date with industry trends. I
                   believe in the power of technology to transform ideas into
@@ -118,9 +118,9 @@ const AboutSection = () => {
           </div>
           {/* Education Card */}
           <div className="animate-on-scroll fade-in-right">
-            <div className="card-elevated relative overflow-hidden backdrop-blur-sm border border-white/5 p-8 rounded-2xl shadow-2xl">
+            <div className="card-elevated relative overflow-hidden backdrop-blur-sm border border-white/30 p-8 rounded-2xl shadow-xl">
               <div className="flex items-center mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-blue-400/10 flex items-center justify-center mr-5 border border-blue-400/20 shadow-inner">
+                <div className="w-14 h-14 rounded-2xl bg-blue-400/10 flex items-center justify-center mr-5 border border-blue-400/40 shadow-inner">
                   <GraduationCap className="w-7 h-7 text-sky-500" />
                 </div>
                 <div>
@@ -141,7 +141,7 @@ const AboutSection = () => {
                       <h4 className="font-semibold text-lg leading-tight">
                         Bachelor of Computer Science
                       </h4>
-                      <p className="text-sky-400 bg-sky-500/10 px-2.5 py-0.5 rounded-full text-xs sm:text-sm w-fit whitespace-nowrap transition-all">
+                      <p className="text-sky-400 bg-sky-500/20 px-2.5 py-0.5 rounded-full text-xs sm:text-sm w-fit whitespace-nowrap transition-all">
                         current cgpa: 3.1
                       </p>
                     </div>
@@ -158,7 +158,7 @@ const AboutSection = () => {
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-white/10">
+                <div className="pt-6 border-t border-white/30">
                   <h5 className="font-medium mb-3 text-sm text-white/70 uppercase tracking-wider">
                     Core Subjects
                   </h5>
@@ -173,7 +173,7 @@ const AboutSection = () => {
                     ].map((subject) => (
                       <span
                         key={subject}
-                        className="px-2 py-1 bg-blue-400/10 text-sky-400 border border-blue-400/10 rounded-full text-xs font-medium hover:bg-blue-400/20 transition-colors duration-300 cursor-default"
+                        className="px-2 py-1 bg-blue-400/10 text-sky-400 border border-blue-400/20 rounded-full text-xs font-medium hover:bg-blue-400/20 transition-colors duration-300 cursor-default"
                       >
                         {subject}
                       </span>
@@ -192,7 +192,7 @@ const AboutSection = () => {
               <Target className="w-8 h-8 rounded-full text-black bg-gradient-to-tr from-gray-500 to-slate-100 mr-3" />
               <h3 className="text-2xl font-bold">Future Goals</h3>
             </div>
-            <p className="text-md text-muted-foreground leading-relaxed">
+            <p className="text-md lg:text-lg text-muted-foreground leading-relaxed">
               I am focused on the synthesis of{" "}
               <span className="text-sky-400 underline">
                 agentic AI workflows
