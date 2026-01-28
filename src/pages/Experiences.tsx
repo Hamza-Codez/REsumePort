@@ -60,13 +60,13 @@ const ExperiencePage = () => {
             </p>
           </div>
 
-          {/* Dynamic Filtering Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-16 p-2 bg-slate-900/50 backdrop-blur-md rounded-2xl border border-white/5 w-fit mx-auto">
+{/* Dynamic Filtering Tabs */}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-16 p-1.5 md:p-2 bg-slate-900/50 backdrop-blur-md rounded-xl md:rounded-2xl border border-white/5 w-[95%] sm:w-fit mx-auto">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-3 py-2 rounded-sm text-sm font-medium transition-all duration-300 ${
+                className={`flex-1 sm:flex-none px-2 md:px-3 py-1.5 md:py-2 rounded-sm text-xs md:text-sm font-medium transition-all duration-300 ${
                   activeTab === tab.id 
                   ? gradientBtnClass2
                   : "text-slate-300 hover:text-white hover:bg-white/5"
