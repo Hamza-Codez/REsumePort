@@ -38,7 +38,7 @@ const ContactSection = () => {
               Connect
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-md lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Ready to bring your ideas to life? Let's discuss how we can work
             together to create something amazing.
           </p>
