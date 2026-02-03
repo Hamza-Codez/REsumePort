@@ -1,198 +1,245 @@
+import React, { useRef } from "react";
+import { motion, Variants, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
-  Award,
-  Zap,
-  ShieldCheck,
-  Monitor,
-  Code,
-  Cpu,
-  ExternalLink,
-  BrainCircuit,
-  Trophy,
-  Wallpaper,
-  Layers,
+  Zap, ShieldCheck, Monitor, Code, Cpu,
+  BrainCircuit, Trophy, Wallpaper, Layers,
 } from "lucide-react";
+
+/* ─── Animation Variants ─────────────────────────────────────────────────── */
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.05, delayChildren: 0.1 },
+  },
+};
+
+const cardEntryVariants: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.2, 0, 0, 1] } 
+  },
+};
+
+/* ─── Data ──────────────────────────────────────────────────────────────── */
 
 const certificates = [
   {
     title: "Gen AI Application Development",
-    issuer: "UETians Lahore & iCode Guru",
+    issuer: "UETians & iCode Guru",
     date: "Nov 2025",
-    skills: ["Generative AI", "Prompt Engineering", "AI Workflow Design"],
-    moreSkills: 1,
-    description:
-      "Certified developer with hands-on understanding of building AI-powered applications.",
-    category: "certifications",
-    icon: <BrainCircuit className="w-5 h-5" />,
+    skills: ["GenAI", "Prompting", "Workflow"],
+    description: "Building AI-powered applications with advanced prompt engineering.",
+    icon: <BrainCircuit />,
   },
   {
     title: "Google Prompting Essentials",
     issuer: "Google",
     date: "Oct 2025",
-    id: "07BZGTG9UCE4",
-    skills: ["5-Step Framework", "AI Agents", "Data Analysis"],
-    description:
-      "Mastered prompting for everyday tasks and sophisticated AI role-playing agents.",
-    category: "certifications",
-    icon: <Zap className="w-5 h-5" />,
+    skills: ["AI Agents", "Analysis"],
+    description: "Mastering AI role-playing agents and sophisticated data analysis frameworks.",
+    icon: <Zap />,
   },
   {
     title: "Google UX Design Specialization",
     issuer: "Google",
     date: "Oct 2025",
-    id: "01AI94Y3TKLA",
-    skills: ["User Research", "Wireframing", "WCAG"],
-    moreSkills: 5,
-    description: "Complete design process from empathy to testable prototypes.",
-    category: "certifications",
-    icon: <Wallpaper className="w-5 h-5" />,
+    skills: ["Research", "Wireframing"],
+    description: "End-to-end design process from user empathy to testable prototypes.",
+    icon: <Wallpaper />,
   },
   {
     title: "Google Project Management",
     issuer: "Google",
     date: "Oct 2025",
-    id: "CVJDUGBX8LOF",
-    skills: ["Agile", "Scrum", "Artifacts"],
-    description:
-      "Foundations of Agile and Scrum roles, events, and documentation.",
-    category: "certifications",
-    icon: <Layers className="w-5 h-5" />,
+    skills: ["Agile", "Scrum", "Lean"],
+    description: "Foundations of Agile roles, scrum events, and project artifacts.",
+    icon: <Layers />,
   },
   {
     title: "Full Stack Web Development",
-    issuer: "Government of Punjab",
+    issuer: "Govt. of Punjab",
     date: "June 2024",
-    id: "dbcd424a79",
-    skills: ["Javascript", "PHP", "mySql"],
-    description:
-      "Comprehensive training in front-end and back-end web development technologies.",
-    category: "certifications",
-    icon: <Code className="w-5 h-5" />,
+    skills: ["JS", "PHP", "MySQL"],
+    description: "Comprehensive training in modern front-end and back-end architectures.",
+    icon: <Code />,
   },
   {
     title: "Meta Hacker Cup 2025",
     issuer: "Meta",
     date: "Nov 2025",
-    skills: ["Competitive Programming", "Problem Solving"],
-    description: "Participation in the annual global programming competition.",
-    category: "projects",
-    icon: <Trophy className="w-5 h-5" />,
+    skills: ["Algorithms", "CP"],
+    description: "Participation in the prestigious global competitive programming challenge.",
+    icon: <Trophy />,
   },
   {
-    title: "Google IT Support Specialization",
+    title: "Google IT Support",
     issuer: "Google",
     date: "Oct 2025",
-    id: "A4UIQJEQGYTA",
-    skills: ["Linux", "DNS", "Command-Line"],
-    description:
-      "Hands-on experience with networking and technical system troubleshooting.",
-    category: "certifications",
-    icon: <Monitor className="w-5 h-5" />,
+    skills: ["Linux", "DNS", "CLI"],
+    description: "Networking, system administration, and technical troubleshooting.",
+    icon: <Monitor />,
   },
   {
-    title: "Tech Entrepreneurship & Hackathon",
-    issuer: "UAF Computing Society",
+    title: "Tech Entrepreneurship",
+    issuer: "UAF Computing",
     date: "Nov 2025",
-    skills: ["Entrepreneurship", "Innovation"],
-    description:
-      "Hackathon participation at the University of Agriculture, Faisalabad.",
-    category: "projects",
-    icon: <Cpu className="w-5 h-5" />,
+    skills: ["Innovation", "Pitching"],
+    description: "Hackathon participation at the University of Agriculture, Faisalabad.",
+    icon: <Cpu />,
   },
   {
     title: "Google Business Intelligence",
     issuer: "Google",
     date: "Oct 2025",
-    id: "O3MNQ0XPOVDS",
-    skills: ["Data Warehousing", "ETL", "Dashboards"],
-    moreSkills: 4,
-    description:
-      "Gained experience in data modeling and business-driven decision making.",
-    category: "certifications",
-    icon: <ShieldCheck className="w-5 h-5" />,
+    skills: ["ETL", "Tableau", "SQL"],
+    description: "Data warehousing and business-driven decision making strategies.",
+    icon: <ShieldCheck />,
   },
 ];
 
-const gradientBtnClass2 =
-  "bg-gradient-to-tl from-blue-500 to-blue-400 text-white shadow-lg";
+/* ─── Card Component ─────────────────────────────────────────────────────── */
 
-const Certifications = () => {
+const CertCard = ({ cert }: { cert: any }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 100, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 100, damping: 30 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <>
-      <div className="text-center mb-16">
-        <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight text-gray-100 dark:text-gray-100">
-          My{" "}
-          <span className="bg-gradient-to-bl from-blue-100 to-slate-400/50 border-gray-300/60 bg-clip-text text-transparent">
-            Certifications
-          </span>
-        </h2>
-        <p className="text-base text-gray-400 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-          A showcase of my dedication to continuous learning and professional growth.
-        </p>
+    <motion.div
+      variants={cardEntryVariants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      // Updated classes: added 'min-w-[85vw] md:min-w-0' for the mobile slider effect
+      className="group relative h-full min-w-[85vw] md:min-w-0 bg-[#0a0c10]/40 backdrop-blur-md p-8 transition-all duration-700 hover:bg-[#0d1117]/90 flex flex-col justify-between overflow-hidden border border-white/5 md:border-none"
+    >
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
+        <motion.div 
+          style={{
+            background: "linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.03) 55%, transparent 80%)",
+            x: useTransform(mouseXSpring, [-0.5, 0.5], ["-100%", "100%"]),
+          }}
+          className="absolute inset-0 w-[200%]"
+        />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {certificates.map((cert, index) => (
-          <div
-            key={index}
-            className="group relative cursor-pointer bg-slate-900/40 backdrop-blur-sm border border-slate-400/20 p-6 rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] flex flex-col justify-between overflow-hidden"
-          >
-            {/* Watermark Issuer Name */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500">
-              <span className="text-4xl font-bold uppercase tracking-tighter whitespace-nowrap -rotate-12">
-                {cert.issuer}
-              </span>
-            </div>
 
-            <div>
-              <div className="flex justify-between items-start mb-4 relative z-10">
-                <div
-                  className={`p-3 rounded-xl bg-blue-500/10 text-sky-400 transition-all duration-300`}
-                >
-                  {cert.icon}
-                </div>
-                <div className="text-right">
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                    {cert.date}
-                  </p>
-                  {cert.id && (
-                    <p className="text-[9px] text-blue-500/60 font-mono mt-1 group-hover:text-blue-400 transition-colors">
-                      ID: {cert.id}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2 relative z-10">
-                <h3 className="text-lg font-bold text-white group-hover:text-sky-400 transition-colors leading-tight">
-                  {cert.title}
-                </h3>
-                <p className="text-xs text-slate-400 font-medium italic">
-                  {cert.issuer}
-                </p>
-                <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mt-2">
-                  {cert.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-2 relative z-10 items-center">
-              {cert.skills.map((skill, i) => (
-                <span
-                  key={i}
-                  className="text-[10px] font-semibold px-2 py-1 rounded bg-blue-500/5 border border-blue-500/10 text-blue-300/80 group-hover:border-blue-500/30 transition-colors"
-                >
-                  {skill}
-                </span>
-              ))}
-              {cert.moreSkills && (
-                <span className="text-[10px] text-slate-500 font-medium">
-                  +{cert.moreSkills} more
-                </span>
-              )}
-            </div>
+      <div className="relative z-10">
+        <div className="flex justify-between items-start mb-6">
+          <div className="text-black bg-gradient-to-tr from-slate-600 to-zinc-400 p-2 rounded-full transition-colors duration-500 shadow-sm">
+            {React.cloneElement(cert.icon, { size: 18, strokeWidth: 1.5 })}
           </div>
+          <span className="text-[10px] font-medium text-slate-600 group-hover:text-slate-500 uppercase tracking-[0.2em] transition-colors">
+            {cert.date}
+          </span>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-base font-medium text-slate-200 tracking-tight group-hover:text-white transition-colors duration-500 leading-snug">
+            {cert.title}
+          </h3>
+          <p className="text-[10px] text-blue-400/50 font-medium uppercase tracking-widest">
+            {cert.issuer}
+          </p>
+          <p className="text-xs text-slate-500 leading-relaxed pt-3 font-light line-clamp-2">
+            {cert.description}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-x-4 gap-y-1 relative z-10 border-t border-white/10 pt-5">
+        {cert.skills.map((skill: string, i: number) => (
+          <span
+            key={i}
+            className="text-[9px] text-slate-600 font-medium uppercase tracking-widest group-hover:text-slate-400 transition-colors duration-500"
+          >
+            {skill}
+          </span>
         ))}
       </div>
-    </>
+    </motion.div>
+  );
+};
+
+const Certifications = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section className="py-2 bg-transparent">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.2 }}
+          className="mb-12"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-px w-6 bg-blue-500/40" />
+            <span className="text-[10px] font-bold text-blue-500 uppercase tracking-[0.4em]">Credentials</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-light text-white ">
+            Professional <span className="text-slate-500">Milestones</span>
+          </h2>
+        </motion.div>
+      </div>
+
+      {/* CONTAINER LOGIC:
+          - Mobile: flex overflow-x-auto (Horizontal Slider)
+          - Desktop: grid grid-cols-3 (Original Grid)
+      */}
+      <div className="max-w-6xl mx-auto md:px-6">
+        <motion.div 
+          ref={scrollRef}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="flex overflow-x-auto pb-8 px-6 gap-4 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-px md:bg-white/5 md:border md:border-white/10 border border-slate-300/20 rounded-md overflow-hidden md:rounded-xl md:overflow-hidden md:px-0 md:pb-0"
+        >
+          {certificates.map((cert, index) => (
+            <div key={index} className="snap-center">
+              <CertCard cert={cert} />
+            </div>
+          ))}
+        </motion.div>
+        
+        {/* Hint for mobile users */}
+        <div className="flex justify-center mt-4 md:hidden">
+            <p className="text-[10px] text-slate-500 uppercase tracking-widest animate-pulse">
+                Swipe to explore →
+            </p>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </section>
   );
 };
 
