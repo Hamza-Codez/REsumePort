@@ -121,11 +121,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary rounded-full;
+    @apply bg-zinc-400 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary-variant;
+    @apply bg-blue-500;
   }
 }
 
