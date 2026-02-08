@@ -50,7 +50,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-0 lg:pt-10 py-20 lg:py-0"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 lg:pt-10 py-20 lg:py-0"
     >
       {" "}
       {/* Animated background */}
