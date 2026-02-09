@@ -1,112 +1,201 @@
-import { GraduationCap, School, BookOpen, MapPin, Calendar } from 'lucide-react';
+import React, { useRef } from "react";
+import { motion, Variants, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { GraduationCap, School, BookOpen } from 'lucide-react';
+
+/* ─── Animation Variants ─────────────────────────────────────────────────── */
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+};
+
+const cardEntryVariants: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.2, 0, 0, 1] } 
+  },
+};
+
+/* ─── Data ──────────────────────────────────────────────────────────────── */
 
 const academicHistory = [
   {
     institution: "University of Agriculture, Faisalabad",
-    degree: "Bachelor's degree, Computer Science",
-    duration: "Sep 2022 – Aug 2026",
-    location: "Faisalabad, Pakistan",
+    degree: "BS Computer Science",
+    duration: "2022 – 2026",
+    location: "Faisalabad, PK",
     grade: "3.1 CGPA",
-    details: [
-      "Currently focusing on core CS principles including Data Structures and Algorithms.",
-      "Active participation in the Computing Society and regional hackathons.",
-      "Engaging in advanced coursework involving Human-Computer Interaction and AI."
-    ],
-    icon: <GraduationCap className="w-5 h-5" />,
-    current: true
+    description: "Core CS principles, Algorithms, and AI research with a focus on HCI.",
+    icon: <GraduationCap />,
+    skills: ["Data Structures", "AI", "HCI"]
   },
   {
     institution: "Prem Sati Trust Kamalia",
     degree: "Intermediate (Pre-Med)",
     duration: "2019 – 2021",
-    location: "Kamalia, Pakistan",
+    location: "Kamalia, PK",
     grade: "Grade: A",
-    details: [
-      "Deep-dived into Biology, Chemistry, and Physics.",
-      "Developed a strong analytical foundation in foundational sciences."
-    ],
-    icon: <BookOpen className="w-5 h-5" />,
-    current: false
+    description: "Intensive studies in empirical sciences and analytical biology.",
+    icon: <BookOpen />,
+    skills: ["Biology", "Chemistry", "Physics"]
   },
   {
     institution: "Govt. High School Kamalia",
     degree: "Matric, Science",
     duration: "2017 – 2019",
-    location: "Kamalia, Pakistan",
+    location: "Kamalia, PK",
     grade: "1025/1100",
-    details: [
-      "Focused on Physics, Chemistry, Biology, and Mathematics basics.",
-      "Achieved high honors with a score of 1025 out of 1100."
-    ],
-    icon: <School className="w-5 h-5" />,
-    current: false
+    description: "Foundational mathematics and honors-level science basics.",
+    icon: <School />,
+    skills: ["Mathematics", "Science"]
   }
 ];
 
-const Education = () => {
+/* ─── Card Component ─────────────────────────────────────────────────────── */
+
+const EducationCard = ({ edu }: { edu: any }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 100, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 100, damping: 30 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <>
-         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight text-gray-100 dark:text-gray-100">
-            My <span className="bg-gradient-to-bl from-blue-100 to-slate-400/50 border-gray-300/60 bg-clip-text text-transparent">Education </span>
-          </h2>
-          <p className="text-base text-gray-400 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Evolving from the precision of empirical sciences to the architecture of computational logics.
-          </p>
-        </div>
-      <div className="relative space-y-12 max-w-4xl mx-auto">
-      {/* Timeline Line */}
-      <div className="absolute left-0 md:left-8 top-2 bottom-2 w-px bg-gradient-to-b from-blue-500/50 via-slate-800 to-transparent" />
+    <motion.div
+      variants={cardEntryVariants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      className="group relative h-full min-w-[85vw] md:min-w-0 bg-[#0a0c10]/40 backdrop-blur-md p-6 md:p-8 transition-all duration-700 hover:bg-[#0d1117]/90 flex flex-col justify-between overflow-hidden border  md:border-none rounded-md border-slate-400/30"
+    >
+      {/* Subtle Shine */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
+        <motion.div 
+          style={{
+            background: "linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.03) 55%, transparent 80%)",
+            x: useTransform(mouseXSpring, [-0.5, 0.5], ["-100%", "100%"]),
+          }}
+          className="absolute inset-0 w-[200%]"
+        />
+      </div>
 
-      {academicHistory.map((edu, index) => (
-        <div key={index} className="relative pl-8 md:pl-20 group cursor-pointer">
-          {/* Timeline Node */}
-          <div className={`absolute left-[-4px] md:left-[28px] top-1.5 w-2 h-2 rounded-full transition-all duration-300 ${
-            edu.current 
-            ? "bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,1)] scale-125" 
-            : "bg-slate-700 group-hover:bg-blue-400"
-          }`} />
-          
-          <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-500/40 p-6 rounded-2xl hover:border-blue-500/30 transition-all duration-300">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-sky-500/20 text-blue-400 group-hover:bg-sky-500/80 group-hover:text-white transition-all">
-                  {edu.icon}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                    {edu.institution}
-                  </h3>
-                  <p className="text-blue-400/90 font-medium">{edu.degree}</p>
-                </div>
-              </div>
-              
-              <div className="flex flex-col items-start md:items-end text-sm text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5" /> {edu.duration}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5" /> {edu.location}
-                </span>
-                <span className="mt-2 px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300 font-bold text-[11px]">
-                  {edu.grade}
-                </span>
-              </div>
-            </div>
-
-            <ul className="space-y-2 mt-4">
-              {edu.details.map((detail, i) => (
-                <li key={i} className="text-slate-400 text-sm leading-relaxed flex gap-3">
-                  <span className="text-blue-500/60 mt-1">•</span>
-                  {detail}
-                </li>
-              ))}
-            </ul>
+      <div className="relative z-10">
+        <div className="flex justify-between items-start mb-6">
+          <div className="text-black bg-gradient-to-tr from-blue-600 to-sky-400 p-2 rounded-full transition-colors duration-500 shadow-sm">
+            {React.cloneElement(edu.icon, { size: 18, strokeWidth: 1.5 })}
+          </div>
+          <div className="flex flex-col items-end">
+            <span className="text-[9px] md:text-[10px] font-medium text-slate-600 group-hover:text-slate-500 uppercase tracking-[0.2em] transition-colors">
+              {edu.duration}
+            </span>
+            <span className="text-[8px] md:text-[9px] text-blue-400/50 font-medium mt-1 uppercase tracking-widest">{edu.grade}</span>
           </div>
         </div>
-      ))}
-    </div>
-    </>
+
+        <div className="space-y-2">
+          <h3 className="text-sm md:text-base font-medium text-slate-200 tracking-tight group-hover:text-white transition-colors duration-500 leading-snug">
+            {edu.institution}
+          </h3>
+          <p className="text-[9px] md:text-[10px] text-blue-400/50 font-medium uppercase tracking-widest">
+            {edu.degree}
+          </p>
+          <p className="text-[11px] md:text-xs text-slate-500 leading-relaxed pt-3 font-light">
+            {edu.description}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-x-4 gap-y-1 relative z-10 border-t border-white/10 pt-5">
+        {edu.skills.map((skill: string, i: number) => (
+          <span
+            key={i}
+            className="text-[8px] md:text-[9px]  text-slate-600 font-medium uppercase tracking-widest group-hover:text-slate-400 transition-colors duration-500"
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+/* ─── Main Section ───────────────────────────────────────────────────────── */
+
+const Education = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section className="py-2 bg-transparent overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.2 }}
+          className="mb-8 md:mb-12"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-px w-6 bg-blue-500/40" />
+            <span className="text-[9px] md:text-[10px] font-bold text-blue-500 uppercase tracking-[0.4em]">Academic Path</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-light text-white tracking-tight">
+            Academic <span className="text-slate-500">History</span>
+          </h2>
+        </motion.div>
+      </div>
+
+      <div className="max-w-6xl mx-auto md:px-6">
+        <motion.div 
+          ref={scrollRef}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="flex overflow-x-auto pb-6 px-6 gap-4 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-px md:bg-white/5 md:border md:border-white/10 border border-white/5 rounded-md overflow-hidden md:rounded-xl md:px-0 md:pb-0 shadow-2xl"
+        >
+          {academicHistory.map((edu, index) => (
+            <div key={index} className="snap-center">
+              <EducationCard edu={edu} />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Mobile Swipe Hint */}
+        <div className="flex justify-center mt-2 md:hidden">
+            <p className="text-[9px] text-slate-600 uppercase tracking-[0.2em] animate-pulse">
+                Swipe to explore →
+            </p>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </section>
   );
 };
 
