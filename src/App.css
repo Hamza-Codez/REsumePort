@@ -8,9 +8,12 @@
 .logo {
   height: 6em;
   padding: 1.5em;
+  /* Optimization: will-change is good, but use it sparingly */
   will-change: filter;
   transition: filter 300ms;
 }
+
+/* Hover effects are usually ignored on mobile, so these are safe to keep */
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -20,10 +23,11 @@
 
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+    /* Use translateZ(0) to trigger GPU acceleration for smoother mobile rendering */
+    transform: rotate(0deg) translateZ(0);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg) translateZ(0);
   }
 }
 
