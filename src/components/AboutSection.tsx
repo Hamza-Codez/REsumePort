@@ -84,7 +84,7 @@ const AboutSection = () => {
             {" "}
             {/* Increased vertical spacing between text and button */}
             <div className="animate-on-scroll fade-in-up">
-              <h3 className="text-2xl font-bold mb-6 text-gradient bg-gradient-to-bl from-gray-400 via-white to-slate-400/40 tracking-tight">
+              <h3 className="text-xl font-bold mb-6 text-gradient bg-gradient-to-bl from-gray-400 via-white to-slate-400/40 tracking-tight">
                 My Journey
               </h3>
               <div className="space-y-6">
@@ -109,9 +109,9 @@ const AboutSection = () => {
             <div className="animate-on-scroll fade-in-up pt-2">
               <button
                 onClick={downloadResume}
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white border border-slate-400/20 rounded-xl hover:-translate-y-1 hover:shadow-2xl hover:shadow-gray-500/20 transition-all duration-500 group"
+                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-slate-700 to-slate-800 text-white border border-slate-400/20 rounded-md hover:-translate-y-1 hover:shadow-2xl hover:shadow-gray-500/20 transition-all duration-500 group"
               >
-                <Award className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" />
+                <Award className="w-4 h-4 mr-3 group-hover:rotate-12 transition-transform duration-300" />
                 <span className="font-medium">Download Resume</span>
               </button>
             </div>
