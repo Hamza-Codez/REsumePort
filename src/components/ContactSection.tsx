@@ -68,13 +68,17 @@ const ContactSection = () => {
             </div>
           </div>
 
-          {/* Image Container */}
           <div className="fade-in-right flex justify-center lg:justify-end">
             <div className="img mb-10 animate-float">
               <img
                 src={contact}
-                alt="Contact"
-                className="w-full max-w-[33rem] pt-6 lg:pl-10 mx-auto object-cover h-full"
+                alt="Contact Muhammad Hamza Ahmad"
+                width="665"
+                height="665"
+                loading="lazy"
+                decoding="async"
+                className="w-full max-w-[33rem] pt-6 lg:pl-10 mx-auto object-cover h-auto"
+                style={{ contentVisibility: "auto" }}
               />
             </div>
           </div>
