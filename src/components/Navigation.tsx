@@ -71,7 +71,6 @@ const Navigation = ({ onNavigateToExperiences }: NavigationProps) => {
 
   return (
     <>
-      {/* Background Overlay/Blur - Only visible when menu is open on mobile */}
       <div 
         className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -83,10 +82,11 @@ const Navigation = ({ onNavigateToExperiences }: NavigationProps) => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
             ? "py-3 bg-black/40 backdrop-blur-md border-b border-white/10 shadow-lg" 
-            : "py-4 bg-transparent"
+            : "py-4 bg-transparent border-none" 
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* WIDTH ADJUSTMENT: Matches Hero Section Alignment */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center group cursor-pointer" onClick={() => handleNavClick("home")}>
               <h1 className="text-xl font-bold tracking-tight text-gradient bg-gradient-to-bl from-blue-100 to-slate-400/50 transition-opacity group-hover:opacity-80">
@@ -148,7 +148,6 @@ const Navigation = ({ onNavigateToExperiences }: NavigationProps) => {
             </div>
           </div>
 
-          {/* MOBILE VIEW NAVIGATION */}
           <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[500px] opacity-100 mt-4 " : "max-h-0 opacity-0"}`}>
             <div className="flex flex-col space-y-4 pt-4 pb-6 px-4 border border-white/20 bg-black/20 backdrop-blur-lg rounded-xl shadow-2xl">
               {menuItems.map((item) => (
@@ -159,30 +158,30 @@ const Navigation = ({ onNavigateToExperiences }: NavigationProps) => {
               ))}
               
               <div className="flex flex-col gap-3 pt-2">
-                  <button
-                      onClick={() => {
-                          onNavigateToExperiences();
-                          window.scrollTo(0, 0);
-                          setIsOpen(false);
-                      }}
-                      className="w-full text-sm inline-flex items-center justify-center px-4 py-3 rounded-sm bg-gradient-to-r from-slate-700 to-slate-800 text-white border border-slate-400/30"
-                  >
-                      <Code className="w-4 h-4 mr-2" />
-                      Experiences
-                  </button>
-                  <button
-                      onClick={() => {
-                          const link = document.createElement("a");
-                          link.href = "/resume.pdf";
-                          link.download = "Hamza_Ahmad_Resume.pdf";
-                          link.click();
-                          setIsOpen(false);
-                      }}
-                      className="w-full inline-flex items-center justify-center px-4 py-3 rounded-sm text-sm bg-gradient-to-tr from-blue-600/30 to-blue-500 text-white border border-blue-500/50"
-                  >
-                      <Download className="w-4 h-4 mr-2" />
-                      Resume
-                  </button>
+                <button
+                  onClick={() => {
+                    onNavigateToExperiences();
+                    window.scrollTo(0, 0);
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-sm inline-flex items-center justify-center px-4 py-3 rounded-sm bg-gradient-to-r from-slate-700 to-slate-800 text-white border border-slate-400/30"
+                >
+                  <Code className="w-4 h-4 mr-2" />
+                  Experiences
+                </button>
+                <button
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = "/resume.pdf";
+                    link.download = "Hamza_Ahmad_Resume.pdf";
+                    link.click();
+                    setIsOpen(false);
+                  }}
+                  className="w-full inline-flex items-center justify-center px-4 py-3 rounded-sm text-sm bg-gradient-to-tr from-blue-600/30 to-blue-500 text-white border border-blue-500/50"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Resume
+                </button>
               </div>
             </div>
           </div>
