@@ -98,7 +98,7 @@ const AboutSection = () => {
                   impact.
                 </p>
                 <p className="text-muted-foreground text-white leading-relaxed opacity-90">
-                  Beyond academics, I'm constantly learning modern web
+                  Beyond academics, I'm constantly learning about modern web
                   technologies and staying up-to-date with industry trends. I
                   believe in the power of technology to transform ideas into
                   reality.
