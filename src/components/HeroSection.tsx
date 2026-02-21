@@ -121,6 +121,7 @@ const HeroSection = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Visit my ${social.label} profile`}
                   className={`w-10 h-10 rounded-full bg-surface/50 border border-slate-400/40 flex items-center justify-center hover-glow ${social.color} transition-all duration-300`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
@@ -154,6 +155,7 @@ const HeroSection = () => {
       {/* Scroll indicator */}
       <button 
         onClick={scrollToNext}
+        aria-label="Scroll down to About section"
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-muted-foreground hover:text-primary transition-colors animate-bounce hidden sm:block"
       >
         <ArrowDown className="w-6 h-6" />
