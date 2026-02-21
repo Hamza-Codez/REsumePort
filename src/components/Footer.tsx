@@ -29,7 +29,7 @@ const staggerContainer: Variants = {
 const linkHover: Variants = {
   hover: { 
     y: -2, 
-    color: "#3b82f6", // blue-500 to match your original hover color
+    color: "#3b82f6", 
     transition: { duration: 0.3, ease: "circOut" as const } 
   }
 };
@@ -54,8 +54,6 @@ const Footer = () => {
     },
   ];
 
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="relative py-12 border-t border-border bg-gradient-to-b from-black via-[#0d1117] to-gray-900 text-white overflow-hidden">
       
@@ -71,7 +69,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center">
           
-          {/* Name & Title */}
+          {/* Name & Title - Changed H3 to H2 for better semantic hierarchy */}
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -79,9 +77,9 @@ const Footer = () => {
             variants={fadeInUp}
             className="mb-6"
           >
-            <h3 className="text-xl font-semibold text-white border-gray-900/30 mb-2">
+            <h2 className="text-xl font-semibold text-white border-gray-900/30 mb-2">
               Open to Collaborate!
-            </h3>
+            </h2>
             <p className="text-muted-foreground">
               Ai Driven Developer • Web Designer • Tech Innovator
             </p>
@@ -106,7 +104,7 @@ const Footer = () => {
                 }}
                 whileHover={{ y: -5, scale: 1.1 }}
                 className="w-8 h-8 rounded-full bg-surface border border-slate-500/40 flex items-center justify-center hover:border-sky-500 hover:bg-primary/10 transition-colors group"
-                aria-label={social.label}
+                aria-label={`Visit my ${social.label} profile`}
               >
                 <social.icon className="w-4 h-4 text-muted-foreground group-hover:text-sky-500 transition-colors" />
               </motion.a>
@@ -114,7 +112,7 @@ const Footer = () => {
           </motion.div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+          <nav className="flex flex-wrap justify-center gap-6 mb-8 text-sm" aria-label="Footer Navigation">
             {[
               { label: "Home", href: "#home" },
               { label: "About", href: "#about" },
@@ -132,9 +130,9 @@ const Footer = () => {
                 {link.label}
               </motion.a>
             ))}
-          </div>
+          </nav>
 
-          {/* Copyright Section (Your Exact Original Text) */}
+          {/* Copyright Section */}
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
