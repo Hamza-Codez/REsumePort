@@ -149,7 +149,7 @@ const Footer = () => {
                 <FolderOpenDot className="w-4 h-4 text-sky-500 mx-1" />
               </p>
               <p className="flex items-center mt-2 sm:mt-0">
-                For my certificates 
+                For more credentials 
                 <ShieldCheck className="w-4 h-4 text-sky-500 mx-1" />{" "}
                 visit me @{" "}
                 <Linkedin className="w-4 h-4 text-sky-500 mx-1" />
